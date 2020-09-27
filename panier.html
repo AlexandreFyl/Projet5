@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <!-- Mettre en place favicon -->
+    <link rel="shortcut icon" type="image/png" href="#">
+
+    <!-- Feuille de style perso -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- Description et title -->
+    <title>Vintage Cam | vente de caméras vintage</title>
+    <meta name="description"
+        content="L'entreprise de web design La chouette agence à Lyon vous propose graphistes webdesigners et intégrateurs afin de créer LE site qui vous correspond !">
+
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- CSS PERSO 
+    
+    <link rel="stylesheet" type="text/css" href="main.css">
+        -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand">Vintage Cam</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="panier.html" class="cart-btn">Votre panier <span class="cart-items">0</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="panier">
+                    <h1>Votre panier :</h1>
+                    <!-- cart -->
+                            <div class="cart-content">
+                                <!-- cart item -->
+                                <!--<div class="cart-item">
+                                    <img src="./images/product-1.jpeg" alt="product" />
+                                    <div>
+                                        <h4>queen bed</h4>
+                                        <h5>$9.00</h5>
+                                        <span class="remove-item">remove</span>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-chevron-up"></i>
+                                        <p class="item-amount">
+                                            1
+                                        </p>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div> -->
+                                <!-- cart item -->
+                            </div>
+                            <div class="cart-footer">
+                                <h3>Total : <span class="cart-total">0</span>€</h3>
+                                <button class="clear-cart banner-btn">Vider le panier</button>
+                            </div>
+                    <!-- end of cart -->
+                </div>
+
+                <h2>Vos informations de commande :</h2>
+                <form class="formulaire">
+                    <div class="form-group">
+                        <label for="email">Adresse Email :</label>
+                        <input type="email" class="form-control" id="email" placeholder="johndoe@gmail.com">
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="nom">Nom de famille :</label>
+                            <input type="text" class="form-control" id="nom" placeholder="Doe">
+                        </div>
+                        <div class="col">
+                            <label for="prenom">Prénom :</label>
+                            <input type="text" class="form-control" id="prenom" placeholder="John">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="adress1">Adresse :</label>
+                        <input type="text" class="form-control" id="adress1" placeholder="125 Rue des lilas">
+                    </div>
+                    <div class="form-group">
+                        <label for="adress2">Complément d'adresse :</label>
+                        <input type="text" class="form-control" id="adress2" placeholder="N° d'appartement, étage, etc">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-8">
+                            <label for="city">Ville :</label>
+                            <input type="text" class="form-control" id="city" placeholder="Paris">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="zip">Code postal :</label>
+                            <input type="text" class="form-control" id="zip" placeholder="75000">
+                        </div>
+                    </div>
+                </form>
+
+                <button id="confirm-command" class="banner-btn">Passer la commande</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Js perso-->
+    <script type="text/javascript" src="myApp.js"></script>
+    <script type="text/javascript" src="panierJS.js"></script>
+
+    <!--Jquery for Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

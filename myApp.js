@@ -25,9 +25,22 @@ let cart = []; // surement a supprimer
 class Products {
     async getProducts() {
         try {
-            let result = await fetch('products.json');
+
+            /* PROBLEME ASYNCHRONYTE REQUETE AJAX 
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                    var result = JSON.parse(this.responseText);
+                    console.log(result);
+                }
+            };
+            request.open("GET", "http://localhost:3000/api/cameras");
+            request.send(); */
+
+            let result = await fetch('products.json'); // remplacer par lien api
             let data = await result.json();
             let products = data.items;
+
             // on remodele un objet a notre image afin de pas avoir un tableau pour les lenses (les fichiers data sont normalement plus complexes a mapper)
             products = products.map(item => {
                 const name = item.name;
@@ -181,27 +194,27 @@ class UI {
     setupApp() { // init de l'app
         cart = Storage.getCart(); // on ajust notre variable cart a notre LS qu'il soit vide ou non
         this.setCartValues(cart); // si il y en a on calcule la valeur du panier ou elle est egale a 0
-        this.populateCart(cart); 
+        this.populateCart(cart);
     }
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item)); // on boucle sur notre resultat de la var cart afin d'écrire tous les items dans le panier en HTML
     }
-    cartLogic(){
+    cartLogic() {
         // vider le panier
-        clearCartBtn.addEventListener('click',()=>{
+        clearCartBtn.addEventListener('click', () => {
             this.clearCart(); // si on met seulement this.clearCart sans le reste cela ressort la balise tel quel en Html alors que la ca renvoie la classe UI
-        }); 
+        });
         // fonctionnalités panier
         cartContent.addEventListener('click', event => {
             //console.log(event.target); // Renvoie la balise sur laquelle on clique
-            if(event.target.classList.contains('remove-item')){ // si je clique sur un element qui a la classe remove-item
+            if (event.target.classList.contains('remove-item')) { // si je clique sur un element qui a la classe remove-item
                 let removeItem = event.target;
                 let id = removeItem.dataset.id; // on recupere le dataset it html qui correspond a celui de nos objets
                 cartContent.removeChild(removeItem.parentElement.parentElement); // on a acces a la div html contenant la classe remove-item on "remonte" au "grand-pere" pour selectionner la div contenant tout l'appareil et ses infos // qui est elle meme un enfant de cart-content
                 this.removeItem(id); // retire du LS
                 location = location;
-            } 
-            else if(event.target.classList.contains('fa-chevron-up')){ // si je clique sur le chevron du haut
+            }
+            else if (event.target.classList.contains('fa-chevron-up')) { // si je clique sur le chevron du haut
                 let addAmount = event.target;
                 let id = addAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id); // on cible l'objet du tableau cart qui correspond a l'id qu'on ressort du dataset
@@ -212,12 +225,12 @@ class UI {
                 Storage.updateTotalPrice(cart);
                 //location = location;
             }
-            else if(event.target.classList.contains('fa-chevron-down')){ // si je clique sur le chevron du bas
+            else if (event.target.classList.contains('fa-chevron-down')) { // si je clique sur le chevron du bas
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id); // on cible l'objet du tableau cart qui correspond a l'id qu'on ressort du dataset
-                tempItem.amount = tempItem.amount -1;
-                if(tempItem.amount > 0){ // si le nombre d'item atteint 0 on supprime l'element du panier
+                tempItem.amount = tempItem.amount - 1;
+                if (tempItem.amount > 0) { // si le nombre d'item atteint 0 on supprime l'element du panier
                     Storage.saveCart(cart);
                     this.setCartValues(cart);
                     lowerAmount.previousElementSibling.innerText = tempItem.amount; // on ecrit le total mis a jour dans la div qui precede celle du chevron down donc la div correspondant a amount
@@ -229,15 +242,15 @@ class UI {
             }
         })
     }
-    clearCart(){
+    clearCart() {
         let cartItems = cart.map(item => item.id); // on extrait l'id des objets qui sont renvoyés et qui correspondent au appareil en ce moment dans le panier
         cartItems.forEach(id => this.removeItem(id)); // on boucle sur le tab d'id renvoyé au dessus et on leur applique la methode remove
-        while(cartContent.children.length > 0){ // tant que le panier contient un article la boucle continue et supprime le premier element du tableau ( contenant les div html) a chaque iteration
+        while (cartContent.children.length > 0) { // tant que le panier contient un article la boucle continue et supprime le premier element du tableau ( contenant les div html) a chaque iteration
             cartContent.removeChild(cartContent.children[0]);
         }
         location = location; // recharge la page afin de re ecrire le total a partir du JS
     }
-    removeItem(id){ // on l'ecrit en dehors de clearCart pour pouvoir s'en servir ailleurs
+    removeItem(id) { // on l'ecrit en dehors de clearCart pour pouvoir s'en servir ailleurs
         cart = cart.filter(item => item.id !== id); // on garde que les items qui on un id different alors qu'on boucle sur ces items doit donc renvoyer un tab vide
         this.setCartValues(cart); // on met a jour la variable de panier
         Storage.saveCart(cart); // on met a jour le panier dans le LS

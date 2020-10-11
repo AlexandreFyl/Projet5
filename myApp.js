@@ -25,35 +25,54 @@ let cart = []; // surement a supprimer
 class Products {
     async getProducts() {
         try {
-
-            /* PROBLEME ASYNCHRONYTE REQUETE AJAX 
+ 
             var request = new XMLHttpRequest();
             request.onreadystatechange = function () {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                    var result = JSON.parse(this.responseText);
-                    console.log(result);
+                    var products = JSON.parse(this.responseText);
+                    //console.log(result);
+                    console.log(products);
+                    products.map(item => {
+                        const name = item.name;
+                        const price = item.price;
+                        const id = item._id;
+                        const description = item.description;
+                        const imageUrl = item.imageUrl;
+                        const lense1 = item.lenses[0];// parcourir le tableau 
+                        const lense2 = item.lenses[1];
+                        const lense3 = item.lenses[2];
+                        return { name, price, description, lense1, lense2, lense3, imageUrl, id };
+                        
+                    });
+                        let result = '';
+                        products.forEach(product => {
+                            result += ` 
+                            <article class="product">
+                            <div class="img-container">
+                                <img src=${product.imageUrl} alt="A COMPLETER" class="product-img">
+                                <button class="bag-btn" data-id=${product.id}>
+                                    <i class="fas fa-shopping-cart">
+                                        add to bag
+                                    </i>
+                                </button>
+                            </div>
+                            <h3>${product.name}</h3>
+                            <h4>${product.price}€</h4>
+                            </article>
+                            `;
+                
+                        });
+                        productsDOM.innerHTML = result;
                 }
             };
-            request.open("GET", "http://localhost:3000/api/cameras");
-            request.send(); */
-
-            let result = await fetch('products.json'); // remplacer par lien api
+            request.open("GET", "https://oc-p5-api.herokuapp.com/api/cameras");
+            request.send(); 
+            /*let result = await fetch('products.json'); // remplacer par lien api
             let data = await result.json();
-            let products = data.items;
+            let products = data.items;*/
 
             // on remodele un objet a notre image afin de pas avoir un tableau pour les lenses (les fichiers data sont normalement plus complexes a mapper)
-            products = products.map(item => {
-                const name = item.name;
-                const price = item.price;
-                const id = item._id;
-                const description = item.description;
-                const imageUrl = item.imageUrl;
-                const lense1 = item.lenses[0];// parcourir le tableau 
-                const lense2 = item.lenses[1];
-                const lense3 = item.lenses[2];
-                return { name, price, description, lense1, lense2, lense3, imageUrl, id };
-            });
-            return products;
+           
         } catch (error) {
             console.log(error);
         }
